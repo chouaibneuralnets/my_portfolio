@@ -90,41 +90,37 @@ resumeBtns.forEach((btn, idx)=> {
 const arrowRight = document.querySelector('.portfolio-box .navigation .arrow-right');
 const arrowLeft = document.querySelector('.portfolio-box .navigation .arrow-left');
 
-let index=0;
+let index = 0;
+const portfolioDetails = document.querySelectorAll('.portfolio-detail');
+const totalPortfolioItems = portfolioDetails.length; // Récupérer la longueur réelle des éléments (dans ce cas, 10)
 
 const activePortfolio = () => {
     const imgSlide = document.querySelector('.portfolio-carousel .img-slide');
-    const portfolioDetails = document.querySelectorAll('.portfolio-detail');
 
-    imgSlide.style.transform = `translateX(calc(${index * -100}% - ${index * 2}rem))`
+    imgSlide.style.transform = `translateX(calc(${index * -100}% - ${index * 2}rem))`;
     portfolioDetails.forEach(detail => {
         detail.classList.remove('active');
-    }); 
+    });
     portfolioDetails[index].classList.add('active');
 }
 
-arrowRight.addEventListener('click', ()=>{
-    if(index < 4) {
+arrowRight.addEventListener('click', () => {
+    if (index < totalPortfolioItems - 1) { // Vérifier si l'index est inférieur à 9 (pour 10 éléments)
         index++;
         arrowLeft.classList.remove('disabled');
+    } else {
+        arrowRight.classList.add('disabled'); // Désactiver la flèche droite si à la fin
     }
-    else{
-        index = 5;
-        arrowRight.classList.add('disabled');
-    }
-
     activePortfolio();
 });
 
-arrowLeft.addEventListener('click', ()=>{
-    if(index > 1) {
+arrowLeft.addEventListener('click', () => {
+    if (index > 0) { // Vérifier si l'index est supérieur à 0
         index--;
         arrowRight.classList.remove('disabled');
+    } else {
+        arrowLeft.classList.add('disabled'); // Désactiver la flèche gauche si au début
     }
-    else{
-        index = 0;
-        arrowLeft.classList.add('disabled');
-    }
-
     activePortfolio();
 });
+
