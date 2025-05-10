@@ -44,7 +44,6 @@ navLinks.forEach((link , idx) =>{
     link.addEventListener('click',()=>{
         if(!link.classList.contains('active')){
             activePage();
-
             link.classList.add('active');
             setTimeout(() =>{
                 sections[idx].classList.add('active')
